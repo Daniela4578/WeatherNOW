@@ -163,7 +163,7 @@ function updateWeatherTheme(data) {
     const images = {
         'Clear': isNight
             ? 'https://i.pinimg.com/1200x/35/a6/77/35a6772eaea3d3dbfd9ae36c9f9995e0.jpg'
-            : 'https://i.pinimg.com/736x/1a/65/74/1a6574a4d3ecfc0f84cd926a78b394f1.jpg',
+            : 'https://i.pinimg.com/1200x/b5/a6/39/b5a639c85dfae33fbf322ad9aca1ab56.jpg',
         'Clouds': isNight
             ? 'https://i.pinimg.com/736x/41/0a/19/410a199b8f89335e0c7e953c1206d20d.jpg'
             :'https://i.pinimg.com/736x/29/56/1f/29561f18ebdc21911ac87a8f8576870d.jpg',
