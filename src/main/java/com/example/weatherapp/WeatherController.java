@@ -1,5 +1,6 @@
 package com.example.weatherapp;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,8 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class WeatherController {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
-    private static final String API_KEY = "f497096c7eec037b02b14c514622b2f7";
+    @Value("${weather.api.key}")
+    private String API_KEY;
 
     @GetMapping("/getWeather")
     public Weather getWeather(@RequestParam String city) {
@@ -37,6 +39,7 @@ public class WeatherController {
                     ObjectMapper mapper = new ObjectMapper();
                     JsonNode node = mapper.readTree(response.body());
 
+                    int id = node.get("weather").get(0).path("id").asInt();
                     String name = node.get("name").asString();
                     int temp = node.get("main").path("temp").asInt();
                     int feels_like = node.get("main").path("feels_like").asInt();
@@ -66,7 +69,7 @@ public class WeatherController {
                         aqiValue = aqiNode.get("list").get(0).get("main").get("aqi").asInt();
                     }
 
-                    return new Weather(name, temperature, cond, hum, icon, wind, timezone, sunrise, sunset, mainCondition,aqiValue);
+                    return new Weather(id, name, temperature, cond, hum, icon, wind, timezone, sunrise, sunset, mainCondition,aqiValue);
                 } else {
                     System.out.println("Error: Could not find city. (Status Code: " + response.statusCode() + ")");
                     return null;

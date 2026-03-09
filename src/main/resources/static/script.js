@@ -157,27 +157,38 @@ function calculateSunProgress(sunrise, sunset) {
 
 function updateWeatherTheme(data) {
     const leftSide = document.querySelector('.left-side');
-    const condition = data.mainCondition;
     const isNight = data.icon.includes('n');
+    let conditionID;
+
+    if(data.id === 800){
+        conditionID = data.id.toString();
+    }
+    else if(Math.floor(data.id / 10) === 80){
+        conditionID = Math.floor(data.id / 10);
+    }
+    else {
+        conditionID = Math.floor(data.id / 100);
+    }
+
 
     const images = {
-        'Clear': isNight
-            ? 'https://i.pinimg.com/1200x/35/a6/77/35a6772eaea3d3dbfd9ae36c9f9995e0.jpg'
-            : 'https://i.pinimg.com/1200x/b5/a6/39/b5a639c85dfae33fbf322ad9aca1ab56.jpg',
-        'Clouds': isNight
-            ? 'https://i.pinimg.com/736x/41/0a/19/410a199b8f89335e0c7e953c1206d20d.jpg'
-            :'https://i.pinimg.com/736x/29/56/1f/29561f18ebdc21911ac87a8f8576870d.jpg',
-        'Rain': isNight
-            ? 'https://i.pinimg.com/736x/cf/42/e0/cf42e040ea4595e20213fca31be1abf6.jpg'
+        2: 'https://i.pinimg.com/1200x/ea/f4/a5/eaf4a5a41b25f6a0c6ce0c808fdec195.jpg', //thunderstorm
+        3: 'https://i.pinimg.com/736x/b6/1f/a4/b61fa44945f218a3b004f5f4f11d39aa.jpg', //drizzle
+        5: isNight
+            ? 'https://i.pinimg.com/736x/cf/42/e0/cf42e040ea4595e20213fca31be1abf6.jpg' //rain
             :'https://i.pinimg.com/736x/17/62/db/1762db3a0da977a4d23fcbc84a912b2b.jpg',
-        'Snow': 'https://i.pinimg.com/736x/ab/c5/ef/abc5efbd22b98378309b8f06ba5d13a4.jpg',
-        'Thunderstorm': 'https://i.pinimg.com/1200x/ea/f4/a5/eaf4a5a41b25f6a0c6ce0c808fdec195.jpg',
-        'Mist': 'https://i.pinimg.com/1200x/bb/b3/44/bbb344aa0b99c66c25e6138afb844116.jpg'
+        80: isNight
+            ? 'https://i.pinimg.com/736x/41/0a/19/410a199b8f89335e0c7e953c1206d20d.jpg' //cloths
+            :'https://i.pinimg.com/736x/29/56/1f/29561f18ebdc21911ac87a8f8576870d.jpg',
+        800: isNight
+            ? 'https://i.pinimg.com/1200x/35/a6/77/35a6772eaea3d3dbfd9ae36c9f9995e0.jpg' //clear sky
+            : 'https://i.pinimg.com/1200x/b5/a6/39/b5a639c85dfae33fbf322ad9aca1ab56.jpg',
+
+        6: 'https://i.pinimg.com/736x/ab/c5/ef/abc5efbd22b98378309b8f06ba5d13a4.jpg', //show
+        7: 'https://i.pinimg.com/736x/64/27/40/642740a923ae1ccdefb0b3490c638044.jpg' //misty
     };
 
-    const bgUrl = images[condition] || images['Clouds'];
+    const url = images[conditionID] || images[800];
 
-    leftSide.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('${bgUrl}')`;
-    leftSide.style.backgroundSize = 'cover';
-    leftSide.style.backgroundPosition = 'center';
+    leftSide.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('${url}')`;
 }

@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 public class Weather {
+    private int id;
     private String cityName;
     private Temperature temperature;
     private String conditions;
@@ -13,7 +14,8 @@ public class Weather {
     private String mainCondition;
     private int aqi;
 
-    public Weather(String cityName, Temperature temperature, String conditions, int humidity, String icon, int windSpeed, int timezone, int sunrise, int sunset, String mainCondition, int aqi) {
+    public Weather(int id, String cityName, Temperature temperature, String conditions, int humidity, String icon, int windSpeed, int timezone, int sunrise, int sunset, String mainCondition, int aqi) {
+        this.id = id;
         this.cityName = cityName;
         this.temperature = temperature;
         this.conditions = conditions;
@@ -26,6 +28,8 @@ public class Weather {
         this.mainCondition = mainCondition;
         this.aqi = aqi;
     }
+
+    public int getId() {return id;}
 
     public String getCityName() {return cityName;}
 
