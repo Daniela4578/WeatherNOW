@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class WeatherController {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
-    @Value("${weather.api.key}")
+    @Value("${WEATHER_API_KEY}")
     private String API_KEY;
 
     @GetMapping("/getWeather")
